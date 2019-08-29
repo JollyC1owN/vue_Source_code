@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>03_数据代理</title>
+  <script src="./js/mvvm.js"></script>
+  <script src="./js/observer.js"></script>
+  <script src="./js/compile.js"></script>
+  <script src="./js/watcher.js"></script>
+</head>
+
+<body>
+
+  <!--
+1. vue数据代理: data对象的所有属性的操作(读/写)由vm对象来代理操作
+2. 好处: 通过vm对象就可以方便的操作data中的数据
+3. 实现:
+  1). 通过Object.defineProperty(vm, key, {})给vm添加与data对象的属性对应的属性
+  2). 所有添加的属性都包含get/set方法
+  3). 在get/set方法中去操作data中对应的属性
+-->
+  <div id="app">
+    
+  </div>
+  <script type="text/javascript">
+     const vm = new MVVM({
+      el:'#app',
+      data:{
+        msg:'哈哈,好开心哦'
+      }
+    })
+    
+    console.log(vm.msg)
+    // console.log(vm)
+    // // 数据代理
+    // console.log(vm.msg)
+    // console.log(vm._data.msg)
+    // console.log(vm.$data)
+
+
+    // 数据代理是存在的
+    // 数据代理指的是vm可以直接访问data对象中的数据
+    // 但是vm.msg 这种方式,实际上是从data对象中找到msg属性,获取msg的值进行返回
+    // 但是vm.msg='小棉花',这种操作,要注意,实际上是改变了data对象中msg属性的值
+
+    // 通过Object.defineProperty()方法为vm实例对象上添加了data中所有的属性
+    // 并且重新设置了属性的配置,里面的get和set全部重写
+
+    // 就是把data中的所有的属性,进行遍历,通过Object.defineProperty()方法为vm对象添加每个data中的属性,并重写get和set方法，实现get和set操作
+  
+    
+  </script>
+
+</body>
+
+</html>

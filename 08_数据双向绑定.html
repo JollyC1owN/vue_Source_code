@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>08_数据双向绑定</title>
+  <script src="./js/mvvm.js"></script>
+  <script src="./js/compile.js"></script>
+  <script src="./js/observer.js"></script>
+  <script src="./js/watcher.js"></script>
+
+</head>
+<body>
+    <div id="app">
+      <input type="text" v-model="msg">
+        <p>{{msg}}</p>
+       
+      </div>
+      <script type="text/javascript">
+        const vm = new MVVM({
+          el: '#app',
+          data: {
+            msg: '123'
+          },
+        })
+
+        //双向数据绑定:模版解析的时候,为v-model对应的标签,绑定一个input事件,并且对应的回调函数,应该是modelUpdater()方法
+        //界面中如果文本框的值改变,就会自动的调用modelUpdater方法,把input标签中的value值更新
+  
+      </script>
+</body>
+</html>

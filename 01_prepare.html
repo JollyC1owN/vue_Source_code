@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+
+  <div id="dv">准备</div>
+
+  <div id="demo">
+    <ul>
+      <li>test1</li>
+      <li>test2</li>
+      <li>test3</li>
+    </ul>
+  </div>
+  <hr>
+  <button id="btn">替换</button>
+  <div id="test">
+    {{msg}}
+  </div>
+
+
+  <script type="text/javascript">
+    //6. DocumentFragment: 文档碎片(高效批量更新多个节点)
+
+    //   <div id="demo">
+    //   <ul>
+    //     <li>test1</li>
+    //     <li>test2</li>
+    //     <li>test3</li>
+    //   </ul>
+    // </div>
+    // 1.创建文档碎片
+    // 2.把容器中的所有的节点,全部存放到文档碎片的对象中
+    // 3.把文档碎片对象中的节点进行操作(修改数据)
+    // 4.把文档碎片对象添加到对应的DOM容器中即可
+
+    // 获取div元素容器
+    var divObj = document.getElementById('demo')
+    // 创建文档碎片
+    var fragment = document.createDocumentFragment()
+    // 节点全部放在文档碎片中
+    let child
+    while (child = divObj.firstChild) {
+      // 相当于是剪切节点
+      fragment.appendChild(child)
+    }
+    var list = fragment.childNodes[1].children
+    for (var i = 0; i < list.length; i++) {
+      list[i].innerText = '哈哈'
+    }
+
+
+    // 把文档碎片添加到div容器中
+    divObj.appendChild(fragment)
+
+
+
+
+    // 伪数组转真数组的方式
+    // const list1 = document.getElementsByTagName('li')
+    // // 转真数组
+    // const list2 = [...list1]
+    // const list3 = Array.from(list1)
+    // const list4 = Array.prototype.slice.call(list1)
+    // console.log(list2 instanceof Array)
+    // console.log(list3 instanceof Array)
+    // console.log(list4 instanceof Array)
+    // // vue源码中经常使用的方式
+    // const list5 = [].slice.call(list1)
+    // console.log(list5 instanceof Array);
+
+    // nodeType-------->节点类型----> 1---标签节点 2---属性节点 3----文本节点 
+
+    // 获取的是标签
+    // var dvNode = document.getElementById('dv')
+    // // 获取属性
+    // var attrNode=dvNode.getAttributeNode('id')
+    // // 获取文本
+    // var txtNode= dvNode.firstChild
+    // console.log(dvNode.nodeType)
+    // console.log(attrNode.nodeType)
+    // console.log(txtNode.nodeType)
+
+
+    // Object.defineProperty(obj, propertyName, {}): 给对象添加属性(指定描述符)
+    // var person = {
+    //   firstName: '东方',
+    //   lastName: '不败'
+    // }
+    // Object.defineProperty(person, 'fullName', {
+    //   configurable: false, // 是否重新定义
+    //   enumerable: true, // 是否被遍历
+    //   //value:'哈哈', // 默认值
+    //   //writable:true , //可写
+    //   get() {
+    //     return '小棉花'
+    //   },
+    //   set() {
+    //     this.firstName = '乔碧萝'
+    //     this.lastName = '殿下'
+    //   }
+    // })
+
+    // 当前的这个对象中是否包含这个属性
+    // console.log(person.hasOwnProperty('toString'))
+
+    // console.log(person.fullName)
+    // person.fullName='哈哈'
+    // console.log(person.firstName)
+    // console.log(person.lastName)
+
+    // var arr=Object.keys(person)
+    // console.log(arr)
+    // for(const key in person){
+    //   if(key==='fullName'){
+    //     console.log(key)
+    //   }
+    // }
+
+    // for(const key in Object.keys(person)){
+    //  console.log(Object.keys(person)[key])
+    // }
+
+
+
+    // 节点:标签节点,属性节点,文本节点
+
+    // 文档-----html页面就是一个文档,文档流:
+    // 文档对象模型----Document Object Model  DOM
+    // 节点---页面中所有东西都是节点(标签,文本,属性)
+    // 元素 ----DOM元素---页面中的标签都是DOM元素
+    // 标签---html标签
+
+
+
+    //----document.write()
+
+    // window.onload=function(){
+    //   // 创建DOM过程中使用,而不是页面加载完毕后去使用
+    //   document.write('<a href="http://www.baidu.com">百度</a>')
+    // }
+
+
+
+
+
+
+
+
+
+    // 函数是对象----两个原型对象---隐式的
+    // 实例对象中有一个__proto__原型
+    //原型:是一个对象,作用:数据共享,节省内存空间,可以实现继承
+    //原型:两个
+    /**
+     * 一个是prototype,显示原型,标准属性,给程序员使用,函数中有
+     * 一个是__proto__,隐式原型,非标准的,给浏览器使用的,对象中有
+     * 对象中有__proto__
+     * 函数中有prototype
+     * 函数也是对象
+     *
+     *
+     */
+    // function f1(){}
+    // var obj={}
+    // console.log(obj)
+    // console.dir(f1)
+
+   // console.log(Math)
+
+
+
+
+
+
+
+
+    // // 函数是对象
+    // function f1(){
+    //   console.log(this)
+    // }
+    // window.f1.call(person)--->改变this指向
+
+
+    // arr就是Array的一个实例对象,Array.prototype.forEach这个方法,arr可以直接使用
+
+    // [].forEach(num=>{
+    //   console.log(num)
+    // })
+
+    // function f1(){
+    //   console.log(this)
+    // }
+    // var person={}
+    // f1.call(person)
+    // f2(per)
+    // function f2(obj){
+
+    //   // var obj2=this
+    //   // obj2[name]='张三'
+    //   var obj2=obj||this
+    //   obj2['name']="张三"
+    // }
+
+
+
+
+
+
+  </script>
+
+
+
+
+
+
+  <script type="text/javascript">
+    // //1. [].slice.call(lis): 将伪数组转换为真数组
+    // const list1 = document.getElementsByTagName('li')
+    // const list2 = [...list1]
+    // const list3 = Array.from(list1)
+    // const list4 = Array.prototype.slice.call(list1)
+    // const list5 = [].slice.call(list1)
+    // console.log(list2 instanceof Array)
+    // console.log(list3 instanceof Array)
+    // console.log(list4 instanceof Array)
+    // console.log(list5 instanceof Array)
+
+    // //2. node.nodeType: DOM节点类型
+    // const eleNode = document.getElementById('demo')
+    // const attrNode = eleNode.getAttributeNode('id')
+    // const txtNode = eleNode.firstChild
+    // console.log(eleNode.nodeType)//标签
+    // console.log(attrNode.nodeType)//属性
+    // console.log(txtNode.nodeType)//文本
+    // // 3. Object.defineProperty(obj, propertyName, {}): 给对象添加属性(指定描述符)
+    // const person = {
+    //   firstName: '东方',
+    //   lastName: '不败'
+    // }
+    // Object.defineProperty(person, 'fullName', {
+    //   configurable: false,//不能重新定义
+    //   enumerable: false,//不能枚举遍历
+    //   //value:'哈-哈',
+    //   //writable:true,//能修改
+    //   get(val) {
+    //     return '诸葛-孔明'
+    //   },
+    //   set(val) {
+    //     this.firstName = '诸葛'
+    //     this.lastName = '孔明'
+    //   }
+    // })
+    // person.fullName = ''
+    // console.log(person.fullName, person.firstName, person.lastName)
+    // // 4. Object.keys(obj): 得到对象自身可枚举属性组成的数组
+    // const keys = Object.keys(person)
+    // for (const key in person) {
+    //   // 5. obj.hasOwnProperty(prop): 判断prop是否是obj自身的属性
+    //   if (person.hasOwnProperty(key)) {
+    //     console.log(key + '=====' + person[key])
+    //   }
+    // }
+    // // 6. DocumentFragment: 文档碎片(高效批量更新多个节点)
+    // //获取元素
+    // const divObj = document.getElementById('demo')
+    // //创建文档碎片
+    // const fragment = document.createDocumentFragment()
+    // //遍历div里面所有的子节点.添加到当前的文档碎片中
+    // let child
+    // while (child = divObj.firstChild) {
+    //   fragment.appendChild(child)
+    // }
+    // //修改里面所有的节点中的文本内容
+    // const ulObj = fragment.childNodes[1]
+    // ulObj.childNodes.forEach(li => {
+    //   li.innerHTML = '你快乐吗'
+    // })
+    // //把碎片加到div中
+    // divObj.appendChild(fragment)
+
+
+    // document.getElementById('btn').onclick = function () {
+    //   //获取test
+    //   const testObj = document.getElementById('test')
+    //   const fragment2 = document.createDocumentFragment()
+    //   let child2
+    //   while (child2 = testObj.firstChild) {
+    //     fragment2.appendChild(child2)
+    //   }
+    //   fragment2.childNodes.forEach(node => {
+    //     const reg = /\{\{(.*)\}\}/
+    //     if (node.nodeType === 3 && reg.test(node.textContent)) {
+    //       node.nodeValue = '真开心'
+    //     }
+    //   })
+    //   testObj.appendChild(fragment2)
+    // }
+
+
+
+  </script>
+
+</body>
+
+</html>

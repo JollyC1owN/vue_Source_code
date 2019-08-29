@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>04_模板解析_表达式_vue</title>
+  <script src="./js/mvvm.js"></script>
+  <script src="./js/compile.js"></script>
+  <script src="./js/observer.js"></script>
+  <script src="./js/watcher.js"></script>
+</head>
+<body>
+<div id="app">
+  <p>{{msg}}</p>
+</div>
+<script type="text/javascript">
+  const vm = new MVVM({
+    el:'#app',
+    data:{
+      msg:'abc',
+     car:{
+       name:'哈哈'
+     }
+    //  car.name
+    }
+  })
+  // {{msg}}等同于v-text
+
+  // <p >哈哈</p>
+  // <p>哈哈</p>
+  // const vm = new Vue({
+  //   el:'#app',
+  //   data:{
+  //     msg:'哈哈'
+  //   }
+  // })
+ 
+  /**
+   * 当实例化vm的时候,会进入到vm的对象内部,调用了compile对象,进行初始化操作
+   * 首先会把el这个容器中所有的子节点全部加入到fragment文档碎片对象中
+   * 内部对文档碎片进行初始化操作
+   * 首先要遍历文档碎片对象中所有的子节点
+   * 1.插值表达式的替换(初始化)
+   * 如果这个节点是一个文本节点,并且这个文本内容的正则就是插值的内容,那么此时要进行替换工作,  me.compileText(node, RegExp.$1.trim());
+   * 首先找到compileUtil.text()方法，先把插值正则表达式中的msg提出来,在通过vm实例对象找到msg这个属性,把值获取到,然后在通过textUpdater()把{{msg}}这个文本节点直接使用msg的值进行替换,最后,页面中的{{msg}}就会变成msg的值:abc
+   * 
+   * 
+   * 
+   */
+
+
+
+
+
+  // '哈噶'  字符类型,字符串类型
+  //  字符类型:里面只能存储一个字符(一个数字,一个字母,一个汉字...)
+  //  char ch='a'
+  //  string str="abc"
+
+
+  // /\{\{(.*)\}\}/
+  // RegExp.$1.trim()
+
+
+  // var reg=/(([a-z]*)((\d+)([A-Z]+)))/    // 五组,从最左边查,查到一个就是第一组
+  // RegExp.$4
+
+  // ((())())
+
+
+
+  // . 除了\n以外任意的一个单个字符
+  // ([0-9][a-z])+ 表示的是前面的这个表达式出现了1次到多次
+  // * 表示的是前面的这个表达式出现了0次到多次
+  // ? 表示的是前面的这个表达式出现了0次到1次
+
+// \d----[0-9]
+// \D----非数字
+// \s ----空白字符             
+// \S ----非空白字符   
+// \w  -----非特殊字符 除了中划线
+// \w -----特殊符号
+
+
+// {1,}  和+一样
+// {0,1} 和?
+// {0,}
+// {,10} 错误写法
+
+
+
+  //属性:vm实例对象中都是属性----data对象中的属性
+  //表达式:模版中(上面的html中用到的属性,叫表达式)
+  //模版解析:打开页面中,页面初始化的时候,直接把相对应的表达式,指令,事件，进行解析,最终以真正的html的效果进行展示
+
+  // var reg = /\{\{(.*)\}\}/;
+  // reg.$2
+
+  //邮箱的正则表达式
+  ///([0-9a-zA-Z_.-]+)[@][0-9a-zA-Z_.-]+(([.][a-zA-Z]+){1,2})/
+  //正则表达式中有几对小括号,就有几组
+  //想使用哪一组,就用$数字即可
+
+
+  //<p>{{msg}}</p>  p.textContent="值"
+  //<p v-text="msg"></p> p.textConent="值"
+   
+
+</script>
+</body>
+</html>

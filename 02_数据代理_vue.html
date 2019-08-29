@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>02_数据代理</title>
+  <script src="./js/vue.js"></script>
+</head>
+<body>
+
+
+  <!--
+1. vue数据代理: data对象的所有属性的操作(读/写)由vm对象来代理操作
+2. 好处: 通过vm对象就可以方便的操作data中的数据
+3. 实现:
+  1). 通过Object.defineProperty(vm, key, {})给vm添加与data对象的属性对应的属性
+  2). 所有添加的属性都包含get/set方法
+  3). 在get/set方法中去操作data中对应的属性
+-->
+  <div id="app">
+
+  </div>
+
+  <script type="text/javascript">
+    const vm = new Vue({
+      el:'#app',
+      data:{
+        msg:'哈哈,好开心哦'
+      }
+    })
+
+    // 简单,方便,
+    console.log(vm.msg) // 可以直接使用
+    console.log(vm._data.msg)
+    console.log(vm.$data.msg)
+
+    // Vue中是可以使用vm代替vm.data来访问data中的数据的,由此可以得出结论:Vue中有数据代理
+    // vm对象代理了data队形,data是被代理者,vm是代理者
+
+
+
+
+
+
+
+
+
+   
+    // vm代理了data----->被代理者:data
+    // 数据代理是存在的
+
+
+
+    // // console.log(vm.data)
+    // // console.log(vm.data.msg)
+
+    // //data这个属性不能通过vm直接访问
+    // //vm是代理对象-----data是被代理对象
+    // console.log(vm.msg)
+    // console.log(vm._data.msg)
+    // console.log(vm)
+    // console.log(vm.$data.msg)
+    //数据代理是存在的
+    //分析的不是真的vue.js---而是网上提供的一套模拟vue.js写的js代码
+    //数据代理-------是存在的
+    //MVVM来创建实例对象---分析源码
+  </script>
+
+
+  <script type="text/javascript">
+//     const vm = new Vue({
+//       el: '#app',
+//       data: {
+//         name: 'A'
+//       }
+//     })
+// //获取属性name的值
+// //console.log(vm.data.name)//不行
+// //因为Vue中是通过数据代理的方式来获取数据的
+// //此时vm是代理, 代理了data
+// console.log(vm)
+// //内部把data属性---->_data或者$data----vm
+// //console.log(vm.$data.name)
+// console.log(vm.name)
+// console.log(vm._data.name)
+
+
+  </script>
+
+</body>
+
+</html>

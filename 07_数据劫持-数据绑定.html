@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>07_数据劫持-数据绑定</title>
+  <!--
+    1. 数据绑定
+      * 初始化显示: 页面(表达式/指令)能从data读取数据显示 (编译/解析)
+      * 更新显示: 更新data中的属性数据==>页面更新
+  -->
+  <script src="./js/mvvm.js"></script>
+  <script src="./js/compile.js"></script>
+  <script src="./js/observer.js"></script>
+  <script src="./js/watcher.js"></script>
+
+</head>
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+  </div>
+  <script type="text/javascript">
+    const vm = new MVVM({
+      el: '#app',
+      data: {
+         msg: '<a href="http://www.baidu.com">百度</a>',
+        // cars:{
+        //   name:'奥拓',
+        //   // color:'black',
+        //   // a:{
+        //   //   b:'哈哈'
+        //   // }
+        // }
+      },
+    })
+         //模版解析初始化页面的  <p v-text="msg"></p>content:'哈哈'
+
+         //一个属性一个dep,一个表达式一个watcher <p>{{cars.name}}</p>
+        //  cars:{
+        //   name:'奔驰',
+        //   color:'red'
+        // }
+
+    //     <p>{{cars.a.b}}</p>
+    // <p>{{cars.a.b}}</p>
+    // <p>{{cars.a.b}}</p>
+  </script>
+</body>
+
+</html>
